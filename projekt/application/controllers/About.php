@@ -23,6 +23,7 @@ class About extends CI_Controller {
         $this->load->view('templates/template/header');
         $this->load->view('about');
         $this->load->view('templates/template/footer');
+        $this->load->view('templates/template/navigation');
 
     }
 }
