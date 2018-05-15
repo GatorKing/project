@@ -31,7 +31,7 @@
                 pagination: false ,
                 minHeight: '444',
                 thumbnails: false,
-                height: '28.28125%',
+                height: '26.18105%',
                 caption: true,
                 navigation: true,
                 fx: 'mosaic'
@@ -60,11 +60,11 @@
                 <div class="grid_12">
                     <nav class="horizontal-nav full-width horizontalNav-notprocessed">
                         <ul class="sf-menu">
-                            <li class="current"><a href="<?php echo site_url('Main')  ?>">Home</a></li>
-                            <li><a href="<?php echo site_url('Vodici')  ?>">Drivers</a></li>
-                            <li><a href="<?php echo site_url('Auta')  ?>">Cars</a></li>
-                            <li><a href="<?php echo site_url('Jazda')  ?>">Rides</a></li>
-                            <li><a href="<?php echo site_url('Zakaznici')  ?>">Customers</a></li>
+                            <li class="current"><a href="<?php echo site_url('Home')  ?>">Home</a></li>
+                            <li><a href="<?php echo site_url('Zakaznik/index')  ?>">Zakaznici</a></li>
+                            <li><a href="<?php echo site_url('Auta')  ?>">Detail</a></li>
+                            <li><a href="<?php echo site_url('Jazda')  ?>">Rezervacia</a></li>
+                            <li><a href="<?php echo site_url('Zakaznik/index')  ?>">Sportoviska</a></li>
                         </ul>
                     </nav>
                     <div class="clear"></div>
@@ -75,8 +75,11 @@
         <div class="container_12">
             <div class="grid_12">
                 <h1>
-                    <a href="<?php echo site_url('Main')  ?>">
-                        <img src="images/logo.png" alt="Your Happy Family">
+                    <a href="<?php echo site_url('home')  ?>">
+                        <img src="assets/images/logo1.jpg" width="600" height="350"  alt="Príď si zašportovať!!">
+                    </a>
+                    <a href="<?php echo site_url('home')  ?>">
+                        <img src="assets/images/logo2.jpg" width="600" height="350"  alt="Príď si zašportovať!!">
                     </a>
                 </h1>
             </div>
@@ -96,50 +99,26 @@
                 <div class="maxheight">
                     <div class="banner_title">
                         <img src="images/icon1.png" alt="">
-                        <div class="extra_wrapper">Fast&amp;
-                            <div class="color1">Safe</div>
+                        <div class="extra_wrapper">Zdravie&amp;
+                            <div class="color1">Šport</div>
                         </div>
                     </div>
-                    Dorem ipsum dolor sit amet, consectetur adipiscinger elit. In mollis erat mattis neque facilisis, sit ameter ultricies erat rutrum. Cras facilisis, nulla vel viver auctor, leo magna sodales felis, quis malesuad
+Prídťe si k nám zašportovať na jednom z našich športovísk. Prerite si našu ponuku a vyberte si to pravé pre Vás.
                     <a href="<?php echo site_url('Jazdy')  ?>" class="fa fa-share-square"></a>
                 </div>
             </div>
         </div>
-        <div class="grid_4">
-            <div class="banner">
-                <div class="maxheight">
-                    <div class="banner_title">
-                        <img src="images/icon2.png" alt="">
-                        <div class="extra_wrapper">Best
-                            <div class="color1">Drivers</div>
-                        </div>
-                    </div>
-                    Hem ipsum dolor sit amet, consectetur adipiscinger elit. In mollis erat mattis neque facilisis, sit ameter ultricies erat rutrum. Cras facilisis, nulla vel viver auctor, leo magna sodales felis, quis malesuader
-                    <a href="<?php echo site_url('Vodici')  ?>" class="fa fa-share-square"></a>
-                </div>
-            </div>
-        </div>
-        <div class="grid_4">
-            <div class="banner">
-                <div class="maxheight">
-                    <div class="banner_title">
-                        <img src="images/icon3.png" alt="">
-                        <div class="extra_wrapper">New
-                            <div class="color1">Cars</div>
-                        </div>
-                    </div>
-                    Kurem ipsum dolor sit amet, consectetur adipiscinger elit. In mollis erat mattis neque facilisis, sit ameter ultricies erat rutrum. Cras facilisis, nulla vel viver auctor, leo magna sodales felis, quis malesuki
-                    <a href="<?php echo site_url('Auta')  ?>" class="fa fa-share-square"></a>
-                </div>
-            </div>
-        </div>
+
         <div class="clear"></div>
     </div>
     <div class="c_phone">
         <div class="container_12">
             <div class="grid_12">
-                <div class="fa fa-phone"></div>+ 1800 559 6580
-                <span>ORDER NOW!</span>
+                <div class="fa fa-phone"></div>+421 911 223 322
+                <span>Rezervuj na tomto čísle</span>
+                <a href="<?php echo site_url('home')  ?>">
+                    <img src="assets/images/ikona.png" width="200" height="200"  alt="Príď si zašportovať!!">
+                </a>
             </div>
             <div class="clear"></div>
         </div>
