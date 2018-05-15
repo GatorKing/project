@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Zakaznik extends CI_Controller
+class Sportoviska extends CI_Controller
 {
 
     function __construct()
@@ -10,7 +10,7 @@ class Zakaznik extends CI_Controller
         parent::__construct();
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $this->load->model('Zakaznik_model');
+        $this->load->model('Sportoviska_model');
 
         $this->load->library('pagination');
     }
@@ -26,26 +26,26 @@ class Zakaznik extends CI_Controller
             $data['error_msg'] = $this->session->userdata('error_msg');
             $this->session->unset_userdata('error_msg');
         }
-        $data['zakaznik'] = $this->Zakaznik_model->getRows();
-        $data['title'] = 'Zakaznik List';
+        $data['zakaznik'] = $this->Sportoviska_model->getRows();
+        $data['title'] = 'Sportoviska List';
 
         $this->load->view('templates/template/header', $data);
-        $this->load->view('Zakaznik/index', $data);
+        $this->load->view('Sportoviska/index', $data);
         $this->load->view('templates/template/footer');
     }
 
-    public function view($idZakaznik) {
+    public function view($idSportoviska) {
         $data = array();
 
-        if (!empty($idZakaznik)) {
-            $data['zakaznik'] = $this->Zakaznik_model->getRows($idZakaznik);
-            $data['title'] = $data['Zakaznik']['idZakaznik'];
+        if (!empty($idSportoviska)) {
+            $data['zakaznik'] = $this->Sportoviska_model->getRows($idSportoviska);
+            $data['title'] = $data['Sportoviska']['idSportoviska'];
 
             $this->load->view('templates/template/header', $data);
-            $this->load->view('Zakaznik/view', $data);
+            $this->load->view('Sportoviska/view', $data);
             $this->load->view('templates/template/footer');
         } else {
-            redirect('/zakaznik');
+            redirect('/sportoviska');
 
         }
     }
@@ -66,7 +66,7 @@ class Zakaznik extends CI_Controller
         $config["total_rows"] = $this->Zakaznik_model->record_count();
         $config["per_page"] = 5;
         $config["uri_segment"] = 3;
-          $config['use_page_numbers'] = TRUE;
+        $config['use_page_numbers'] = TRUE;
         $config['num_links'] = $this->Zakaznik_model->record_count();
         $config['cur_tag_open'] = '&nbsp;<a class="page-link">';
         $config['cur_tag_close'] = '</a>';
@@ -95,7 +95,7 @@ class Zakaznik extends CI_Controller
     public function json_records_per_user() {
         $data = $this->Zakaznik_model->record_count_per_user_array();
 
-         $responce = nil;
+        $responce = nil;
         $responce->cols[] = array(
             "id" => "",
             "label" => "User",
@@ -131,37 +131,37 @@ class Zakaznik extends CI_Controller
 
         if ($this->input->post('postSubmit')) {
 
-            $this->form_validation->set_rules('idZakaznik', 'id zakaznika', 'required');
-            $this->form_validation->set_rules('Meno', 'Meno',
+            $this->form_validation->set_rules('idSportoviska', 'idSportoviska', 'required');
+            $this->form_validation->set_rules('Objekt', 'Objekt',
                 'required');
-            $this->form_validation->set_rules('TelCislo', 'Telefonne Cislo', 'required');
-            $this->form_validation->set_rules('Email', 'email', 'required');
+            $this->form_validation->set_rules('otvorene_od', 'otvorene_od', 'required');
+            $this->form_validation->set_rules('otvorene_do', 'otvorene_do', 'required');
 
             $postData = array(
-                'idZakaznik' => $this->input->post('idZakaznik'),
-                'Meno' => $this->input->post('Meno'),
-                'TelCislo' => $this->input->post('TelCislo'),
-                'Email' => $this->input->post('Email'),
-                'description' => $this->input->post('description'),
+                'idZakaznik' => $this->input->post('idSportoviska'),
+                'Meno' => $this->input->post('Objekt'),
+                'TelCislo' => $this->input->post('otvorene_od'),
+                'Email' => $this->input->post('otvorene_do'),
+
             );
 
             if ($this->form_validation->run() == true) {
 
-                $insert = $this->Zakaznik_model->insert($postData);
+                $insert = $this->Sportoviska_model->insert($postData);
                 if ($insert) {
                     $this->session->set_userdata('success_msg', 'Zakaznik
 bol uspesne pridany');
-                    redirect('/zakaznik');
+                    redirect('index.php/sportoviska');
                 } else {
                     $data['error_msg'] = 'Some problems occurred, please try
 again.';
                 }
             }
         }
-        $data['users'] = $this->Zakaznik_model->get_users_dropdown();
+        $data['users'] = $this->Sportoviska_model->get_users_dropdown();
         $data['users_selected'] = '';
         $data['post'] = $postData;
-        $data['title'] = 'Create Zakaznik';
+        $data['title'] = 'Create Sportoviska';
         $data['action'] = 'Add';
 
         $this->load->view('templates/template/header', $data);
@@ -173,44 +173,44 @@ again.';
     {
         $data = array();
 
-        $postData = $this->Zakaznik_model->getRows($id);
+        $postData = $this->Sportoviska_model->getRows($id);
 
         if ($this->input->post('postSubmit')) {
 
-            $this->form_validation->set_rules('idZakaznik', 'id Zakaznika', 'required');
-            $this->form_validation->set_rules('Meno', 'meno zakaznika', 'required');
-            $this->form_validation->set_rules('TelCislo', 'telefonne cislo', 'required');
-            $this->form_validation->set_rules('Email', 'email', 'required');
+            $this->form_validation->set_rules('idSportoviska', 'idSportoviska', 'required');
+            $this->form_validation->set_rules('Objekt', 'meno zakaznika', 'required');
+            $this->form_validation->set_rules('otvorene_od', 'otvorene_od', 'required');
+            $this->form_validation->set_rules('otvorene_do', 'otvorene_do', 'required');
 
             $postData = array(
-                'idZakaznik' => $this->input->post('idZakaznik'),
-                'Meno' => $this->input->post("Meno"),
-                'TelCislo' => $this->input->post('TelCislo'),
-                'Email' => $this->input->post('Email'),
-                'description' => $this->input->post('description'),
+                'idSportoviska' => $this->input->post('idSportoviska'),
+                'Objekt' => $this->input->post("Objekt"),
+                'otvorene_od' => $this->input->post('otvorene_od'),
+                'otvorene_do' => $this->input->post('otvorene_do'),
+
             );
 
             if ($this->form_validation->run() == true) {
 
-                $update = $this->Zakaznik_model->update($postData, $id);
+                $update = $this->Sportoviska_model->update($postData, $id);
                 if ($update) {
-                    $this->session->set_userdata('success_msg', 'Zakaznik
+                    $this->session->set_userdata('success_msg', 'Sportoviska
 has been updated successfully.');
-                    redirect('/Zakaznik');
+                    redirect('/Sportoviska');
                 } else {
                     $data['error_msg'] = 'Some problems occurred, please try
 again.';
                 }
             }
         }
-        $data['users'] = $this->Zakaznik_model->get_users_dropdown();
+        $data['users'] = $this->Sportoviska_model->get_users_dropdown();
         $data['users_selected'] = $postData['user'];
         $data['post'] = $postData;
-        $data['title'] = 'Update Zakaznik';
+        $data['title'] = 'Update Sportoviska';
         $data['action'] = 'Edit';
 
         $this->load->view('templates/template/header', $data);
-        $this->load->view('Zakaznik/edit', $data);
+        $this->load->view('Sportoviska/edit', $data);
         $this->load->view('templates/template/footer');
 
     }
@@ -219,7 +219,7 @@ again.';
 
         if($id){
 
-            $delete = $this->Zakaznik_model->delete($id);
+            $delete = $this->Sportoviska_model->delete($id);
             if($delete){
                 $this->session->set_userdata('success_msg', 'Zakaznik has
 been removed successfully.');
@@ -228,7 +228,7 @@ been removed successfully.');
 occurred, please try again.');
             }
         }
-        redirect('/Zakaznik');
+        redirect('/Sportoviska');
     }
 
 }

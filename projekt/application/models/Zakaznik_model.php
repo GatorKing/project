@@ -56,7 +56,7 @@ class Zakaznik_model extends CI_Model
             {
                 $dropdownlist[$dropdown->id] = $dropdown->fullname;
             }
-            $dropdownlist[''] = 'Select a user ... ';
+            $dropdownlist[''] = 'Zakaznik';
             return $dropdownlist;
         }
     }

@@ -55,14 +55,14 @@ class Sportoviska_model extends CI_Model
             {
                 $dropdownlist[$dropdown->id] = $dropdown->fullname;
             }
-            $dropdownlist[''] = 'Select a user ... ';
+            $dropdownlist[''] = 'Vyber sportovisko ';
             return $dropdownlist;
         }
     }
 
     public function fetch_data($limit,$start) {
         $this->db->limit($limit,$start);
-        $query = $this->db->get("Zakaznik");
+        $query = $this->db->get("Sportovisko");
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row) {
                 $data[] = $row;
@@ -73,22 +73,22 @@ class Sportoviska_model extends CI_Model
     }
 
     public function record_count (){
-        return $this->db->count_all("Zakaznik");
+        return $this->db->count_all("Sportovisko");
     }
 
     public function record_count_per_user() {
-        $this->db->select('Meno, COUNT(Zakaznik.id) AS counts');
-        $this->db->from('Zakaznik');
+        $this->db->select('Objekt, COUNT(idSportovisko) AS counts');
+        $this->db->from('Sportovisko');
 
-        $this->db->group_by('Meno');
+        $this->db->group_by('Objekt');
         return $this->db->get();
     }
 
     public function record_count_per_user_array() {
-        $this->db->select('Meno, COUNT(Zakaznik.id) AS counts');
-        $this->db->from('Zakaznik');
+        $this->db->select('Objekt, COUNT(idSportovisko) AS counts');
+        $this->db->from('Sportovisko');
 
-        $this->db->group_by('Meno');
+        $this->db->group_by('Objekt');
         $query = $this->db->get();
         return $query->result_array();
     }

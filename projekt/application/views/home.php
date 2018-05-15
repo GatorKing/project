@@ -55,30 +55,13 @@
 <div class="main">
     <!--==============================header=================================-->
     <header>
-        <div class="menu_block ">
-            <div class="container_12">
-                <div class="grid_12">
-                    <nav class="horizontal-nav full-width horizontalNav-notprocessed">
-                        <ul class="sf-menu">
-                            <li class="current"><a href="<?php echo site_url('Home')  ?>">Home</a></li>
-                            <li><a href="<?php echo site_url('Zakaznik/index')  ?>">Zakaznici</a></li>
-                            <li><a href="<?php echo site_url('Auta')  ?>">Detail</a></li>
-                            <li><a href="<?php echo site_url('Jazda')  ?>">Rezervacia</a></li>
-                            <li><a href="<?php echo site_url('Zakaznik/index')  ?>">Sportoviska</a></li>
-                        </ul>
-                    </nav>
-                    <div class="clear"></div>
-                </div>
-                <div class="clear"></div>
-            </div>
-        </div>
         <div class="container_12">
             <div class="grid_12">
                 <h1>
-                    <a href="<?php echo site_url('home')  ?>">
+                    <a href="<?php echo site_url('index.php/Sportoviska')  ?>">
                         <img src="assets/images/logo1.jpg" width="600" height="350"  alt="Príď si zašportovať!!">
                     </a>
-                    <a href="<?php echo site_url('home')  ?>">
+                    <a href="<?php echo site_url('index.php/Sportoviska')  ?>">
                         <img src="assets/images/logo2.jpg" width="600" height="350"  alt="Príď si zašportovať!!">
                     </a>
                 </h1>
@@ -86,13 +69,6 @@
         </div>
         <div class="clear"></div>
     </header>
-    <div class="slider_wrapper ">
-        <div id="camera_wrap" class="">
-            <div data-src="images/slide.jpg" ></div>
-            <div data-src="images/slide1.jpg" ></div>
-            <div data-src="images/slide2.jpg"></div>
-        </div>
-    </div>
     <div class="container_12">
         <div class="grid_4">
             <div class="banner">
@@ -116,7 +92,7 @@ Prídťe si k nám zašportovať na jednom z našich športovísk. Prerite si na
             <div class="grid_12">
                 <div class="fa fa-phone"></div>+421 911 223 322
                 <span>Rezervuj na tomto čísle</span>
-                <a href="<?php echo site_url('home')  ?>">
+                <a href="<?php echo site_url('index.php')  ?>">
                     <img src="assets/images/ikona.png" width="200" height="200"  alt="Príď si zašportovať!!">
                 </a>
             </div>

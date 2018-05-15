@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Zakaznik extends CI_Controller
+class Detail extends CI_Controller
 {
 
     function __construct()
@@ -38,7 +38,7 @@ class Zakaznik extends CI_Controller
         $data = array();
 
         if (!empty($idZakaznik)) {
-            $data['zakaznik'] = $this->Zakaznik_model->getRows($idZakaznik);
+            $data['zakaznik'] = $this->Detail_model->getRows($idZakaznik);
             $data['title'] = $data['Zakaznik']['idZakaznik'];
 
             $this->load->view('templates/template/header', $data);
@@ -66,7 +66,7 @@ class Zakaznik extends CI_Controller
         $config["total_rows"] = $this->Zakaznik_model->record_count();
         $config["per_page"] = 5;
         $config["uri_segment"] = 3;
-          $config['use_page_numbers'] = TRUE;
+        $config['use_page_numbers'] = TRUE;
         $config['num_links'] = $this->Zakaznik_model->record_count();
         $config['cur_tag_open'] = '&nbsp;<a class="page-link">';
         $config['cur_tag_close'] = '</a>';
@@ -95,7 +95,7 @@ class Zakaznik extends CI_Controller
     public function json_records_per_user() {
         $data = $this->Zakaznik_model->record_count_per_user_array();
 
-         $responce = nil;
+        $responce = nil;
         $responce->cols[] = array(
             "id" => "",
             "label" => "User",
@@ -165,7 +165,7 @@ again.';
         $data['action'] = 'Add';
 
         $this->load->view('templates/template/header', $data);
-        $this->load->view('Sportoviska/create', $data);
+        $this->load->view('temperatures/create', $data);
         $this->load->view('templates/template/footer');
     }
 

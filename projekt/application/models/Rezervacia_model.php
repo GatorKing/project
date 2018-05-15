@@ -9,21 +9,21 @@ class Rezervacia_model extends CI_Model
     }
     function getRows($id= "") {
         if(!empty($id)){
-            $this->db->select('idZakaznik,Meno, TelCislo, Email');
+            $this->db->select('idRezervacia, cas_od  cas_do, den, sposob_platby, Zakaznik_idZakaznik');
 
-            $query = $this->db->get_where('Zakaznik', array('idZakaznik' => $id));
+            $query = $this->db->get_where('rezervacia', array('idRezervacia' => $id));
             return $query->row_array();
         }else{
-            $this->db->select('idZakaznik,Meno, TelCislo, Email');
+            $this->db->select('idRezervacia, cas_od, cas_do, sposob_platby, Zakaznik_idZakaznik');
 
-            $query = $this->db->get('Zakaznik');
+            $query = $this->db->get('rezervacia');
             return $query->result_array();
         }
     }
 
 
     public function insert($data = array()) {
-        $insert = $this->db->insert('zakaznik', $data);
+        $insert = $this->db->insert('rezervacia', $data);
         if($insert){
             return $this->db->insert_id();
         }else{
@@ -31,8 +31,8 @@ class Rezervacia_model extends CI_Model
 
     public function update($data, $id) {
         if(!empty($data) && !empty($id)){
-            $update = $this->db->update('zakaznik', $data,
-                array('id'=>$id));
+            $update = $this->db->update('rezervacia', $data,
+                array('idRezervacia'=>$id));
             return $update?true:false;
         }else{
             return false;
@@ -40,14 +40,14 @@ class Rezervacia_model extends CI_Model
     }
 
     public function delete($id){
-        $delete = $this->db->delete('zakaznik',array('id'=>$id));
+        $delete = $this->db->delete('rezervacia',array('idRezervacia'=>$id));
         return $delete?true:false;
     }
 
     public function get_users_dropdown($id = ""){
-        $this->db->order_by('Meno')
-            ->select('idZakaznik, Meno')
-            ->from('Zakaznik');
+        $this->db->order_by('den')
+            ->select('idRezervacia, den')
+            ->from('rezervacia');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             $dropdowns = $query->result();
@@ -55,14 +55,14 @@ class Rezervacia_model extends CI_Model
             {
                 $dropdownlist[$dropdown->id] = $dropdown->fullname;
             }
-            $dropdownlist[''] = 'Select a user ... ';
+            $dropdownlist[''] = 'Vytvor rezervaciu';
             return $dropdownlist;
         }
     }
 
     public function fetch_data($limit,$start) {
         $this->db->limit($limit,$start);
-        $query = $this->db->get("Zakaznik");
+        $query = $this->db->get("rezervacia");
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row) {
                 $data[] = $row;
@@ -73,22 +73,22 @@ class Rezervacia_model extends CI_Model
     }
 
     public function record_count (){
-        return $this->db->count_all("Zakaznik");
+        return $this->db->count_all("rezervacia");
     }
 
     public function record_count_per_user() {
-        $this->db->select('Meno, COUNT(Zakaznik.id) AS counts');
-        $this->db->from('Zakaznik');
+        $this->db->select('Den, COUNT(idRezervacia) AS counts');
+        $this->db->from('rezervacia');
 
-        $this->db->group_by('Meno');
+        $this->db->group_by('Den');
         return $this->db->get();
     }
 
     public function record_count_per_user_array() {
-        $this->db->select('Meno, COUNT(Zakaznik.id) AS counts');
-        $this->db->from('Zakaznik');
+        $this->db->select('Den, COUNT(idRezervacia) AS counts');
+        $this->db->from('rezervacia');
 
-        $this->db->group_by('Meno');
+        $this->db->group_by('Den');
         $query = $this->db->get();
         return $query->result_array();
     }
