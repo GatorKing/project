@@ -1,18 +1,23 @@
-<?php
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
 class Zakaznik_model extends CI_Model
 {
 
     public function __construct()
     {
-        $this->load->database();
+
     }
 
     function getRows($id= "") {
         if(!empty($id)){
-            $query = $this->db->get_where('zakaznik', array('idZakaznik' => $id));
+            $this->db->select('idZakaznik,Meno, TelCislo, Email');
+
+            $query = $this->db->get_where('Zakaznik', array('idZakaznik' => $id));
             return $query->row_array();
         }else{
-            $query = $this->db->get('zakaznik');
+            $this->db->select('idZakaznik,Meno, TelCislo, Email');
+
+            $query = $this->db->get('Zakaznik');
             return $query->result_array();
         }
     }
@@ -39,4 +44,57 @@ class Zakaznik_model extends CI_Model
         $delete = $this->db->delete('zakaznik',array('id'=>$id));
         return $delete?true:false;
     }
+
+    public function get_users_dropdown($id = ""){
+        $this->db->order_by('Meno')
+            ->select('idZakaznik, Meno')
+            ->from('Zakaznik');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $dropdowns = $query->result();
+            foreach ($dropdowns as $dropdown)
+            {
+                $dropdownlist[$dropdown->id] = $dropdown->fullname;
+            }
+            $dropdownlist[''] = 'Select a user ... ';
+            return $dropdownlist;
+        }
+    }
+
+    public function fetch_data($limit,$start) {
+        $this->db->limit($limit,$start);
+        $query = $this->db->get("Zakaznik");
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+    }
+
+    public function record_count (){
+        return $this->db->count_all("Zakaznik");
+    }
+
+    public function record_count_per_user() {
+        $this->db->select('Meno, COUNT(Zakaznik.id) AS counts');
+        $this->db->from('Zakaznik');
+
+        $this->db->group_by('Meno');
+        return $this->db->get();
+    }
+
+    public function record_count_per_user_array() {
+        $this->db->select('Meno, COUNT(Zakaznik.id) AS counts');
+        $this->db->from('Zakaznik');
+
+        $this->db->group_by('Meno');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }
+
+?>
+}
+
