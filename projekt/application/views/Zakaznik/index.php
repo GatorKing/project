@@ -17,7 +17,7 @@
  <div class="col-xs-12">
  <div class="panel panel-default ">
  <div class="panel-heading">Zakaznik <a href="<?php echo
-site_url('Zakaznik/create/'); ?>" class="glyphicon glyphicon-plus pullright"
+site_url('Zakaznici'); ?>" class="glyphicon glyphicon-plus pullright"
 ></a></div>
  <table class="table table-striped">
  <thead>

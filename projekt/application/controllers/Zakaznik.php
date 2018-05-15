@@ -15,8 +15,7 @@ class Zakaznik extends CI_Controller
         $this->load->library('pagination');
     }
 
-    public function index()
-    {
+    public function index() {
         $data = array();
 
         if ($this->session->userdata('success_msg')) {
@@ -35,13 +34,12 @@ class Zakaznik extends CI_Controller
         $this->load->view('templates/template/footer');
     }
 
-    public function view($id)
-    {
+    public function view($idZakaznik) {
         $data = array();
 
-        if (!empty($id)) {
-            $data['zakaznik'] = $this->Zakaznik_model->getRows($id);
-            $data['title'] = $data['Zakaznik']['idZakznik'];
+        if (!empty($idZakaznik)) {
+            $data['zakaznik'] = $this->Zakaznik_model->getRows($idZakaznik);
+            $data['title'] = $data['Zakaznik']['idZakaznik'];
 
             $this->load->view('templates/template/header', $data);
             $this->load->view('Zakaznik/view', $data);
@@ -54,7 +52,7 @@ class Zakaznik extends CI_Controller
 
     public function index_pagination(){
         $data = array();
-        //ziskanie sprav zo session
+
         if($this->session->userdata('success_msg')){
             $data['success_msg'] = $this->session->userdata('success_msg');
             $this->session->unset_userdata('success_msg');
@@ -64,12 +62,12 @@ class Zakaznik extends CI_Controller
             $this->session->unset_userdata('error_msg');
         }
         $config = array();
-        $config["base_url"] = base_url() . "index.php/temperatures/index_pagination";
-        $config["total_rows"] = $this->Temperatures_model->record_count();
+        $config["base_url"] = base_url() . "index.php/Zakaznik/index_pagination";
+        $config["total_rows"] = $this->Zakaznik_model->record_count();
         $config["per_page"] = 5;
         $config["uri_segment"] = 3;
-        //  $config['use_page_numbers'] = TRUE;
-        //$config['num_links'] = $this->Temperatures_model->record_count();
+          $config['use_page_numbers'] = TRUE;
+        $config['num_links'] = $this->Zakaznik_model->record_count();
         $config['cur_tag_open'] = '&nbsp;<a class="page-link">';
         $config['cur_tag_close'] = '</a>';
         $config['next_link'] = 'Next';
@@ -81,17 +79,17 @@ class Zakaznik extends CI_Controller
         else{
             $page = 0;
         }
-        $data["temperatures"] = $this->Temperatures_model->fetch_data($config["per_page"], $page);
+        $data["temperatures"] = $this->Zakaznik_model->fetch_data($config["per_page"], $page);
         $str_links = $this->pagination->create_links();
         $data["links"] = explode('&nbsp;',$str_links );
-        $data['records_per_user'] = $this->Temperatures_model->record_count_per_user();
-        $data['json_records_per_user'] = json_encode($this->Temperatures_model->record_count_per_user_array());
-        // $data['temperatures'] = $this->Temperatures_model->getRows();
-        $data['title'] = 'Temperature List';
-        //nahratie zoznamu teplot
-        $this->load->view('templates/header', $data);
-        $this->load->view('temperatures/index_pagination', $data);
-        $this->load->view('templates/footer');
+        $data['records_per_user'] = $this->Zakaznik_model->record_count_per_user();
+        $data['json_records_per_user'] = json_encode($this->Zakaznik_model->record_count_per_user_array());
+        $data['zakaznik'] = $this->Zakaznik_model->getRows();
+        $data['title'] = 'Zakaznik List';
+
+        $this->load->view('templates/template/header', $data);
+        $this->load->view('Zakaznik/index_pagination', $data);
+        $this->load->view('templates/template/footer');
     }
 
     public function json_records_per_user() {
